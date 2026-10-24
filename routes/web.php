@@ -14,9 +14,10 @@ use App\Http\Controllers\Web\Admin\DashboardController as AdminDashboardControll
 use App\Http\Controllers\Web\Admin\ChildrenController as AdminChildren;
 use App\Http\Controllers\Web\Admin\MonitoringController;
 use App\Http\Controllers\Web\Admin\ReportController;
+use App\Http\Controllers\Web\PrayerController;
 
 // Guest
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::get('/', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/register', [AuthController::class, 'showRegister']);
@@ -64,6 +65,9 @@ Route::middleware('auth')->group(function () {
         ->name('admin.users.password.update');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::get('/prayers', [PrayerController::class, 'index'])->name('prayer.index');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/children', [ChildController::class, 'index']);

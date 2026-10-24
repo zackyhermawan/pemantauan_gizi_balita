@@ -30,4 +30,10 @@ class Monitoring extends Model
     {
         return $this->belongsTo(User::class, 'admin_id');
     }
+
+    public function quranVerse()
+    {
+        // Mengambil ayat yang cocok berdasarkan kolom nutritional_status
+        return $this->belongsTo(QuranVerse::class, 'nutritional_status', 'status_gizi');
+    }
 }

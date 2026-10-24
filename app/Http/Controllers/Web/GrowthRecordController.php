@@ -11,45 +11,35 @@ use App\Models\Monitoring;
 
 class GrowthRecordController extends Controller
 {
-    // LIST / RIWAYAT
     public function index(Request $request)
     {
         $query = GrowthRecord::with(['child', 'admin']);
 
-        // 1. Filter Role (Hanya lihat data anak sendiri jika bukan admin)
         if (Auth::user()->role !== 'admin') {
             $query->whereHas('child', function ($q) {
                 $q->where('user_id', Auth::id());
             });
         }
 
-        // 2. Filter Nama Anak
         $query->when($request->child_id, function ($q) use ($request) {
             $q->where('child_id', $request->child_id);
         });
 
-        // 3. Filter Status Gizi (Sangat berguna untuk melihat history anak tertentu)
         $query->when($request->status, function ($q) use ($request) {
             $q->where('nutritional_status', $request->status);
         });
 
-        // 4. Filter Berdasarkan Bulan/Tahun (Opsional, tapi bagus untuk laporan)
         $query->when($request->date, function ($q) use ($request) {
             $q->whereDate('record_date', $request->date);
         });
 
-        // Ambil data terbaru di paling atas dan gunakan pagination
         $records = $query->latest()->paginate(10)->withQueryString();
 
-        // Ambil daftar anak untuk dropdown filter
-        $children = Auth::user()->role === 'admin' 
-                    ? \App\Models\Children::all() 
-                    : \App\Models\Children::where('user_id', Auth::id())->get();
+        $children = Auth::user()->role === 'admin' ? \App\Models\Children::all()  : \App\Models\Children::where('user_id', Auth::id())->get();
 
         return view('growth.index', compact('records', 'children'));
     }
 
-    // FORM CREATE
     public function create()
     {
         if (Auth::user()->role === 'admin') {
@@ -61,7 +51,6 @@ class GrowthRecordController extends Controller
         return view('growth.create', compact('children'));
     }
 
-    // SIMPAN DATA
     public function store(Request $request)
     {
         $request->validate([
@@ -88,21 +77,19 @@ class GrowthRecordController extends Controller
 
     public function edit($id)
     {
-        $record = GrowthRecord::findOrFail($id);
-
-        // proteksi user
-        if (Auth::user()->role === 'user' && $record->child->user_id !== Auth::id()) {
+        $record = GrowthRecord::with('child')->findOrFail($id);
+    
+        if (Auth::user()->role === 'user' && $record->child->user_id != Auth::id()) {
             abort(403);
         }
-
         return view('growth.edit', compact('record'));
     }
 
     public function update(Request $request, $id)
     {
-        $record = GrowthRecord::findOrFail($id);
+        $record = GrowthRecord::with('child')->findOrFail($id);
 
-        if (Auth::user()->role === 'user' && $record->child->user_id !== Auth::id()) {
+        if (Auth::user()->role === 'user' && $record->child->user_id != Auth::id()) {
             abort(403);
         }
 
@@ -125,46 +112,37 @@ class GrowthRecordController extends Controller
                 $q->where('user_id', Auth::id());
             });
 
-        // 1. Filter Nama Anak
         $query->when($request->child_id, function ($q) use ($request) {
             $q->where('child_id', $request->child_id);
         });
 
-        // 2. Filter Status Monitoring (Pending/Reviewed/Warning)
-        $query->when($request->status, function ($q) use ($request) {
-            $q->where('status', $request->status);
+        $query->when($request->nutritional_status, function ($q) use ($request) {
+            $q->where('nutritional_status', $request->nutritional_status);
         });
 
-        // 3. Filter Tanggal Penilaian
         $query->when($request->date, function ($q) use ($request) {
             $q->whereDate('created_at', $request->date);
         });
 
-        // Ambil data terbaru dan paginate
         $history = $query->latest()->paginate(10)->withQueryString();
 
-        // Daftar anak milik Bunda untuk dropdown filter
         $children = \App\Models\Children::where('user_id', Auth::id())->get();
 
         return view('growth.history', compact('history', 'children'));
     }
 
-    // DELETE (opsional)
-    public function destroy(Request $request, $id) // Tambahkan Request $request
+    public function destroy(Request $request, $id)
     {
         $record = GrowthRecord::findOrFail($id);
 
-        // Proteksi user (Sudah Mantap!)
-        if (Auth::user()->role === 'user' && $record->child->user_id !== Auth::id()) {
+        if (Auth::user()->role === 'user' && $record->child->user_id != Auth::id()) {
             abort(403);
         }
 
-        // Simpan halaman saat ini sebelum dihapus
         $currentPage = $request->query('page', 1);
 
         $record->delete();
 
-        // Cek sisa data untuk menentukan apakah harus pindah halaman
         $remainingItems = GrowthRecord::whereHas('child', function ($q) {
             if (Auth::user()->role !== 'admin') {
                 $q->where('user_id', Auth::id());
@@ -174,14 +152,11 @@ class GrowthRecordController extends Controller
         $itemsPerPage = 10;
         $lastPage = ceil($remainingItems / $itemsPerPage);
 
-        // Jika halaman saat ini jadi kosong, lempar ke halaman sebelumnya
         if ($currentPage > $lastPage && $lastPage > 0) {
             return redirect()->route('growth.index', ['page' => $lastPage])
-                            ->with('success', 'Data berhasil dihapus');
+                            ->with('success', 'Catatan berhasil dihapus.');
         }
 
-        // Jika masih ada data di halaman tersebut, pakai back() tidak masalah
-        return redirect()->route('growth.index', ['page' => $currentPage])
-                        ->with('success', 'Data berhasil dihapus');
+        return redirect('/growth')->with('success', 'Catatan berhasil dihapus.');
     }
 }

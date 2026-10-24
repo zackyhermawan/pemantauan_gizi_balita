@@ -4,6 +4,87 @@
 
 @section('content')
 
+<div class="bg-white rounded-3xl p-5 md:p-6 shadow-sm border border-rose-50 hover:shadow-md transition-all relative overflow-hidden mb-8 group">
+
+    {{-- Dekorasi --}}
+    <div class="absolute top-0 right-0 w-24 h-24 bg-rose-50 rounded-full -mr-10 -mt-10 group-hover:bg-rose-100 transition-colors"></div>
+
+    <div class="relative">
+
+        {{-- HEADER --}}
+        <div class="flex items-center justify-between mb-5">
+
+            <div class="flex items-center space-x-3">
+
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-rose-400 to-pink-500 flex items-center justify-center text-white shadow-md">
+                    <x-heroicon-o-sparkles class="w-6 h-6"/>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-extrabold text-slate-800">
+                        Mutiara Qur'an
+                    </h3>
+
+                    <p class="text-[10px] uppercase tracking-widest font-bold text-slate-400">
+                        Inspirasi Hari Ini
+                    </p>
+                </div>
+
+            </div>
+
+            <span class="px-3 py-1 rounded-xl bg-rose-50 text-rose-500 text-xs font-bold">
+                {{ $dailyQuote->surah }}
+            </span>
+
+        </div>
+
+        {{-- AYAT --}}
+        <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100">
+
+            <p class="text-right text-3xl md:text-4xl leading-loose text-slate-900 font-serif">
+                {{ $dailyQuote->arabic_text }}
+            </p>
+
+        </div>
+
+        {{-- TERJEMAHAN --}}
+        <div class="mt-4 p-4 rounded-2xl bg-rose-50/60 border border-rose-100">
+
+            <p class="text-sm italic leading-relaxed text-slate-600">
+                "{{ $dailyQuote->translation }}"
+            </p>
+
+        </div>
+
+        {{-- PESAN --}}
+        <div class="mt-4 rounded-2xl bg-amber-50 border border-amber-100 p-4">
+
+            <div class="flex items-start">
+
+                <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600 mr-3">
+                    <x-heroicon-o-light-bulb class="w-5 h-5"/>
+                </div>
+
+                <div>
+
+                    <p class="text-xs uppercase tracking-wider font-black text-amber-700 mb-1">
+                        Pesan Edukasi Gizi
+                    </p>
+
+                    <p class="text-sm text-slate-700 leading-relaxed">
+                        {{ $dailyQuote->nutrition_note }}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 {{-- EMPTY STATE: Dibuat lebih ringkas di mobile --}}
 @if($children->isEmpty())
     <div class="bg-white border-2 border-dashed border-rose-200 p-6 md:p-10 rounded-2xl text-center mb-8 mx-2">

@@ -39,11 +39,11 @@
 
             <div>
                 <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2 mb-2 block italic">Status Gizi</label>
-                <select name="status" class="w-full px-4 py-3 bg-slate-50 border-none rounded-xl text-xs font-bold text-slate-700 focus:ring-2 focus:ring-rose-200 transition-all appearance-none">
+                <select name="nutritional_status" class="w-full px-4 py-3 bg-slate-50 border-none rounded-xl text-xs font-bold text-slate-700 focus:ring-2 focus:ring-rose-200 transition-all appearance-none">
                     <option value="">Semua Status</option>
-                    <option value="Gizi Baik" {{ request('status') == 'Gizi Baik' ? 'selected' : '' }}>Gizi Baik</option>
-                    <option value="Stunting" {{ request('status') == 'Stunting' ? 'selected' : '' }}>Stunting</option>
-                    <option value="Gizi Kurang" {{ request('status') == 'Gizi Kurang' ? 'selected' : '' }}>Gizi Kurang</option>
+                    <option value="Gizi Baik" {{ request('nutritional_status') == 'Gizi Baik' ? 'selected' : '' }}>Gizi Baik</option>
+                    <option value="Stunting" {{ request('nutritional_status') == 'Stunting' ? 'selected' : '' }}>Stunting</option>
+                    <option value="Gizi Kurang" {{ request('nutritional_status') == 'Gizi Kurang' ? 'selected' : '' }}>Gizi Kurang</option>
                 </select>
             </div>
 
@@ -123,7 +123,7 @@
 
                 {{-- Catatan Admin (The Speech Bubble Style) --}}
                 @if($item->admin_notes)
-                <div class="relative z-10 mt-2">
+                <div class="relative z-10 mt-2 mb-4">
                     <div class="bg-white p-4 md:p-5 rounded-xl border-2 border-rose-50 relative">
                         {{-- Little speech bubble triangle --}}
                         <div class="absolute -top-2 left-6 w-4 h-4 bg-white border-t-2 border-l-2 border-rose-50 transform rotate-45"></div>
@@ -135,6 +135,41 @@
                         <p class="text-xs md:text-sm font-bold text-slate-600 italic leading-relaxed pl-1">
                             "{{ $item->admin_notes }}"
                         </p>
+                    </div>
+                </div>
+                @endif
+
+                {{-- Fitur Islami: Renungan untuk Bunda --}}
+                @if($item->quranVerse)
+                <div class="relative z-10 mt-4 bg-emerald-50/40 border border-slate-100 rounded-2xl p-5 md:p-6 shadow-sm">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-base">🌿</span>
+                        <h4 class="text-xs font-black text-emerald-800 uppercase tracking-widest">Renungan untuk Bunda</h4>
+                    </div>
+
+                    <div class="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-emerald-100 space-y-3">
+                        {{-- Nama Surah --}}
+                        <p class="text-xs font-bold text-emerald-700 flex items-center gap-1.5">
+                            <span>📖</span> {{ $item->quranVerse->surah }}
+                        </p>
+
+                        {{-- Teks Arab --}}
+                        <p class="text-right text-lg md:text-xl font-serif text-slate-800 leading-loose py-1" dir="rtl">
+                            {{ $item->quranVerse->arabic_text }}
+                        </p>
+
+                        {{-- Terjemahan --}}
+                        <p class="text-xs md:text-sm font-medium text-slate-600 italic leading-relaxed bg-emerald-50/30 p-3 rounded-lg border-l-2 border-emerald-400">
+                            "{{ $item->quranVerse->translation }}"
+                        </p>
+
+                        {{-- Makna --}}
+                        <div class="pt-2 border-t border-slate-100">
+                            <p class="text-[10px] font-black text-emerald-600 uppercase tracking-wider mb-1">Makna & Hikmah:</p>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                {{ $item->quranVerse->meaning }}
+                            </p>
+                        </div>
                     </div>
                 </div>
                 @endif
