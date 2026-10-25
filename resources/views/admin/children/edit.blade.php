@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <form action="/admin/children/{{ $child->id }}" onsubmit="handleLogin(this)" method="POST" class="space-y-5 md:space-y-8">
+        <form action="/admin/children/{{ $child->id }}" onsubmit="handleSubmit(this)" method="POST" class="space-y-5 md:space-y-8">
             @csrf
             @method('PUT')
             
@@ -87,22 +87,19 @@
 </div>
 <script>
 
-    function handleLogin(form) {
+    function handleSubmit(form) {
         const btn = document.getElementById('updateBtn');
         const text = document.getElementById('btnText');
         const spinner = document.getElementById('spinner');
 
-        // 1. Matikan tombol biar gak di-klik dua kali
         btn.disabled = true;
         
-        // 2. Ubah tampilan tombol (agak transparan & kursor berubah)
         btn.classList.add('opacity-80', 'cursor-not-allowed');
 
-        // 3. Ganti teks & munculkan spinner
         text.innerText = 'Memuat...'; 
         spinner.classList.remove('hidden');
 
-        return true; // Biarkan form lanjut kirim data ke server
+        return true;
     }
 </script>
 @endsection

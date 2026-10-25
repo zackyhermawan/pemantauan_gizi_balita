@@ -8,7 +8,6 @@
     <p class="text-slate-500 font-medium">Data perkembangan anak yang telah divalidasi.</p>
 </div>
 
-{{-- Filter Box --}}
 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 mb-6">
     <form action="{{ route('admin.reports.growth') }}" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div class="flex flex-col">
@@ -32,7 +31,6 @@
             </select>
         </div>
         
-        {{-- Tombol Aksi --}}
         <div class="md:col-span-2 flex items-end gap-2">
             <button type="submit" class="flex-1 py-3 bg-rose-500 text-white font-bold rounded-xl uppercase text-xs tracking-widest shadow-lg shadow-rose-100 hover:bg-rose-600 transition-all">
                 Filter Data

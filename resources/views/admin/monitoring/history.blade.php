@@ -16,7 +16,6 @@
 </div>
 
 <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden mx-2">
-    {{-- Tambahkan min-width pada tabel agar scroll horizontal muncul di HP --}}
     <div class="overflow-x-auto w-full">
         <table class="w-full text-left min-w-[650px] border-collapse">
             <thead>
@@ -42,7 +41,6 @@
                         </p>
                     </td>
 
-                    {{-- BB/TB --}}
                     <td class="px-4 md:px-6 py-4 text-center">
                         @if($item->growth)
                             <span class="text-xs md:text-sm font-black text-slate-600 tracking-tight whitespace-nowrap">
@@ -55,7 +53,6 @@
                         @endif
                     </td>
 
-                    {{-- STATUS GIZI --}}
                     @php
                         $status = $item->nutritional_status;
                         $color = match($status) {
@@ -74,7 +71,6 @@
                         </span>
                     </td>
 
-                    {{-- TANGGAL --}}
                     <td class="px-4 md:px-6 py-4 text-center">
                         <div class="flex flex-col whitespace-nowrap">
                             <span class="text-xs md:text-sm font-black text-slate-700 italic uppercase">

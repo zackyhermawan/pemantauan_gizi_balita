@@ -30,7 +30,6 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
-        // 2. Tambahkan logika pengambil Mutiara Qur'an
         $totalQuotes = DailyQuote::count();
         $dailyQuote = null;
 
@@ -41,7 +40,6 @@ class DashboardController extends Controller
             $dailyQuote = DailyQuote::offset($offset)->first() ?? DailyQuote::first();
         }
 
-        // 3. Masukkan 'dailyQuote' ke dalam compact
         return view('dashboard', compact('children', 'latestFood', 'dailyQuote'));
     }
 }

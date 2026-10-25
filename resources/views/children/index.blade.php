@@ -3,8 +3,6 @@
 @section('title', 'Daftar Si Kecil')
 
 @section('content')
-
-{{-- HEADER: Responsif gap dan alignment --}}
 <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-2">
     <div>
         <h3 class="text-slate-500 text-xs md:text-sm font-medium uppercase tracking-wider">Manajemen Data</h3>
@@ -16,7 +14,6 @@
     </a>
 </div>
 
-{{-- ALERT: Alert yang lebih manis di mobile --}}
 @if(session('success'))
     <div class="bg-emerald-50 border border-emerald-100 text-emerald-600 p-4 mb-6 rounded-2xl flex items-center mx-2 shadow-sm">
         <x-heroicon-o-check-circle class="w-6 h-6 mr-3 shrink-0" />
@@ -24,10 +21,8 @@
     </div>
 @endif
 
-{{-- TABEL CONTAINER: overflow-x-auto adalah kunci --}}
 <div class="bg-white rounded-2xl md:rounded-3xl shadow-sm border border-rose-50 overflow-hidden mx-2">
     <div class="overflow-x-auto w-full">
-        {{-- Set min-w-[800px] agar tabel tidak gepeng di layar kecil --}}
         <table class="w-full text-left border-collapse min-w-[800px]">
             <thead>
                 <tr class="bg-rose-50/50">
@@ -41,7 +36,6 @@
             <tbody class="divide-y divide-rose-50">
                 @foreach($children as $child)
                 <tr class="hover:bg-rose-50/20 transition-colors">
-                    {{-- Nama Anak --}}
                     <td class="px-6 py-4">
                         <div class="flex items-center">
                             <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-100 to-rose-50 text-rose-500 flex items-center justify-center mr-3 shadow-sm border border-rose-100">
@@ -51,28 +45,24 @@
                         </div>
                     </td>
 
-                    {{-- Tgl Lahir --}}
                     <td class="px-6 py-4 text-center">
                         <span class="text-slate-600 font-bold text-xs md:text-sm whitespace-nowrap">
                             {{ \Carbon\Carbon::parse($child->date_of_birth)->format('d F Y') }}
                         </span>
                     </td>
 
-                    {{-- Kelamin --}}
                     <td class="px-6 py-4 text-center">
                         <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-[10px] md:text-xs font-black uppercase tracking-tight">
                             {{ $child->gender }}
                         </span>
                     </td>
 
-                    {{-- Orang Tua --}}
                     <td class="px-6 py-4">
                         <span class="text-slate-500 text-xs md:text-sm font-medium italic">
                             Bunda {{ $child->parent_name }}
                         </span>
                     </td>
 
-                    {{-- Aksi --}}
                     <td class="px-6 py-4">
                         <div class="flex justify-center items-center gap-3">
                             <a href="/children/{{ $child->id }}/edit" 
@@ -97,7 +87,6 @@
         </table>
     </div>
     
-    {{-- FOOTER INFO: Muncul jika data kosong --}}
     @if($children->isEmpty())
         <div class="py-12 text-center text-slate-400 italic text-sm">
             Belum ada data anak yang terdaftar.

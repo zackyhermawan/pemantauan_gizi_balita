@@ -4,7 +4,6 @@
 
 @section('content')
 
-{{-- HEADER --}}
 <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-2">
     <div>
         <h3 class="text-slate-500 text-xs md:text-sm font-medium uppercase tracking-wider">Monitoring Fisik</h3>
@@ -15,10 +14,8 @@
     </a>
 </div>
 
-{{-- SECTION FILTER --}}
 <div class="bg-white p-5 md:p-6 rounded-2xl md:rounded-3xl shadow-sm border border-rose-50 mb-6 mx-2">
     <form action="/growth" method="GET" class="flex flex-col md:flex-row gap-4">
-        {{-- Filter Anak --}}
         <div class="flex-1">
             <label class="text-[10px] font-black text-slate-400 uppercase mb-1.5 block ml-1 tracking-widest italic">Pilih Anak</label>
             <div class="relative">
@@ -34,7 +31,6 @@
             </div>
         </div>
 
-        {{-- Tombol Aksi --}}
         <div class="flex items-end gap-2 pt-2 md:pt-0">
             <button type="submit" class="flex-1 md:flex-none md:px-8 py-3 bg-slate-800 text-white font-black rounded-xl text-xs uppercase tracking-widest hover:bg-slate-700 transition-all shadow-md active:scale-95">
                 Filter
@@ -53,7 +49,6 @@
     </div>
 @endif
 
-{{-- TABEL DATA --}}
 <div class="bg-white rounded-2xl md:rounded-3xl shadow-sm border border-rose-50 overflow-hidden mx-2">
     <div class="overflow-x-auto w-full">
         <table class="w-full text-left border-collapse min-w-[600px]">
@@ -124,7 +119,6 @@
     </div>
 </div>
 
-{{-- LINK PAGINATION --}}
 <div class="mt-8 px-4">
     {{ $records->links() }}
 </div>

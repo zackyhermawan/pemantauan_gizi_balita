@@ -42,15 +42,11 @@
             <form method="POST" action="/login" onsubmit="handleLogin(this)" class="space-y-6 md:space-y-5">
                 @csrf
 
-                {{-- USERNAME --}}
                 <div class="relative group">
-                    <input type="text" name="username"
-                        placeholder="Username"
-                        class="w-full pl-12 pr-4 py-4 md:py-3.5 bg-slate-50 border border-slate-100 rounded-2xl text-base md:text-sm font-bold text-slate-700 focus:ring-4 focus:ring-rose-200 shadow-inner outline-none transition-all focus:bg-white focus:border-rose-100">
+                    <input type="text" name="username" placeholder="Username" class="w-full pl-12 pr-4 py-4 md:py-3.5 bg-slate-50 border border-slate-100 rounded-2xl text-base md:text-sm font-bold text-slate-700 focus:ring-4 focus:ring-rose-200 shadow-inner outline-none transition-all focus:bg-white focus:border-rose-100">
                     <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xl md:text-lg opacity-60 group-focus-within:opacity-100 transition-opacity">👤</span>
                 </div>
 
-                {{-- PASSWORD --}}
                 <div class="relative group">
                     <input type="password" name="password"
                         placeholder="Password"
@@ -58,10 +54,7 @@
                     <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xl md:text-lg opacity-60 group-focus-within:opacity-100 transition-opacity">🔒</span>
                 </div>
 
-                {{-- BUTTON --}}
-                <button type="submit" id="loginBtn"
-                    class="w-full py-3 md:py-4 bg-rose-500 text-white font-black rounded-2xl shadow-xl shadow-rose-200 hover:bg-rose-600 hover:-translate-y-0.5 active:scale-[0.98] transition-all flex items-center justify-center gap-3">
-                    
+                <button type="submit" id="loginBtn" class="w-full py-3 md:py-4 bg-rose-500 text-white font-black rounded-2xl shadow-xl shadow-rose-200 hover:bg-rose-600 hover:-translate-y-0.5 active:scale-[0.98] transition-all flex items-center justify-center gap-3">
                     <span id="btnText" class="text-lg md:text-base transition-all">Masuk Sekarang</span>
 
                     <svg id="spinner" class="hidden animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -71,7 +64,6 @@
                 </button>
             </form>
 
-            {{-- FOOTER --}}
             <div class="mt-10 md:mt-8 transition-all">
                 <p class="text-sm md:text-xs text-center text-slate-400 font-medium uppercase tracking-widest transition-all">
                     Belum punya akun?

@@ -10,7 +10,6 @@
         Kembali
     </a>
 
-    {{-- HEADER --}}
     <div class="mb-6 md:mb-8 px-2">
         <h2 class="text-xl md:text-2xl font-black text-slate-800 uppercase italic leading-tight">
             Validasi Penilaian Gizi
@@ -30,7 +29,6 @@
         @endif
     </div>
 
-    {{-- ALERT JIKA DATA KOSONG --}}
     @if(!$lastGrowth)
     <div class="mb-6 px-2">
         <div class="bg-amber-50 border-2 border-dashed border-amber-200 p-6 rounded-xl flex flex-col items-center text-center">
@@ -46,10 +44,7 @@
     </div>
     @endif
 
-    {{-- GRID: Riwayat & Makanan --}}
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 mb-6 md:mb-8">
-
-        {{-- ================== PERTUMBUHAN ================== --}}
         <div class="bg-white rounded-xl md:rounded-xl p-5 md:p-6 shadow-sm border border-slate-100">
             <h3 class="text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-widest mb-4 md:mb-5 italic text-center">
                 Riwayat Pertumbuhan
@@ -97,7 +92,6 @@
             @endif
         </div>
 
-        {{-- ================== MAKANAN ================== --}}
         <div class="bg-white rounded-xl md:rounded-xl p-5 md:p-6 shadow-sm border border-slate-100">
             <h3 class="text-[10px] md:text-xs font-black text-blue-400 uppercase tracking-widest mb-4 md:mb-5 italic text-center">
                 Catatan Makan Hari Ini
@@ -130,10 +124,8 @@
         </div>
     </div>
 
-    {{-- ================== FORM ================== --}}
-    {{-- Kita tambahkan opacity-50 dan pointer-events-none jika data kosong --}}
     <div class="bg-white rounded-xl md:rounded-xl p-6 md:p-10 shadow-sm border border-rose-50 {{ !$lastGrowth ? 'opacity-50 pointer-events-none select-none' : '' }}">
-        <form action="/admin/monitoring/{{ $child->id }}" onsubmit="handleLogin(this)"  method="POST">
+        <form action="/admin/monitoring/{{ $child->id }}" onsubmit="handleSubmit(this)"  method="POST">
             @csrf
             @method('PUT')
 
@@ -142,7 +134,6 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
 
-                {{-- STATUS GIZI --}}
                 <div class="space-y-2">
                     <label class="text-[9px] md:text-[10px] font-black text-slate-400 uppercase ml-2 italic tracking-wider">
                         Tentukan Status Gizi
@@ -159,21 +150,16 @@
                     </select>
                 </div>
 
-                {{-- CATATAN --}}
                 <div class="space-y-2">
                     <label class="text-[9px] md:text-[10px] font-black text-slate-400 uppercase ml-2 italic tracking-wider">
                         Saran untuk Ibu
                     </label>
 
-                    <textarea name="admin_notes" {{ !$lastGrowth ? 'disabled' : '' }}
-                        class="w-full px-5 py-4 bg-slate-50 border-none rounded-xl md:rounded-2xl font-bold text-slate-700 shadow-inner focus:ring-2 focus:ring-rose-200 text-xs md:text-sm"
-                        rows="3"
-                        placeholder="Contoh: Tambah protein, perbanyak sayur..."></textarea>
+                    <textarea name="admin_notes" {{ !$lastGrowth ? 'disabled' : '' }} class="w-full px-5 py-4 bg-slate-50 border-none rounded-xl md:rounded-2xl font-bold text-slate-700 shadow-inner focus:ring-2 focus:ring-rose-200 text-xs md:text-sm" rows="3" placeholder="Contoh: Tambah protein, perbanyak sayur..."></textarea>
                 </div>
             </div>
 
-            <button id="editBtn" type="submit" {{ !$lastGrowth ? 'disabled' : '' }}
-                class="flex items-center justify-center gap-3 w-full mt-4 py-4 md:py-5 bg-rose-500 text-white font-black rounded-xl md:rounded-2xl shadow-xl shadow-rose-100 hover:bg-rose-600 active:scale-[0.98] transition-all uppercase tracking-widest text-xs md:text-sm cursor-pointer">
+            <button id="editBtn" type="submit" {{ !$lastGrowth ? 'disabled' : '' }} class="flex items-center justify-center gap-3 w-full mt-4 py-4 md:py-5 bg-rose-500 text-white font-black rounded-xl md:rounded-2xl shadow-xl shadow-rose-100 hover:bg-rose-600 active:scale-[0.98] transition-all uppercase tracking-widest text-xs md:text-sm cursor-pointer">
                 <span id="btnText">{{ !$lastGrowth ? 'Penilaian Tidak Tersedia' : 'Simpan Penilaian' }}</span>
                 <div id="spinner" class="hidden animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
             </button>
@@ -182,7 +168,7 @@
 </div>
 
 <script>
-     function handleLogin(form) {
+     function handleSubmit(form) {
         const btn = document.getElementById('editBtn');
         const text = document.getElementById('btnText');
         const spinner = document.getElementById('spinner');

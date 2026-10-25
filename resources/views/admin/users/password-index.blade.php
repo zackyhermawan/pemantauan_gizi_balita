@@ -3,8 +3,6 @@
 @section('title', 'Kelola Password')
 
 @section('content')
-
-{{-- HEADER --}}
 <div class="mb-6 md:mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
     <div>
         <h2 class="text-xl md:text-2xl lg:text-3xl font-black text-slate-800 tracking-tighter uppercase">
@@ -16,7 +14,6 @@
     </div>
 </div>
 
-{{-- ALERT --}}
 @if(session('success'))
     <div class="mb-6 p-4 bg-emerald-50 border border-emerald-100 text-emerald-600 rounded-2xl font-bold text-sm flex items-center">
         <x-heroicon-o-check-circle class="w-5 h-5 mr-2" />
@@ -25,7 +22,6 @@
 @endif
 
 
-{{-- TABLE --}}
 <div class="bg-white rounded-xl shadow-sm border border-rose-50 overflow-hidden mb-6">
     <div class="overflow-x-auto">
         <table class="w-full text-left min-w-[700px]">
@@ -50,7 +46,6 @@
                 @forelse($users as $user)
                 <tr class="hover:bg-rose-50/20 transition-colors">
 
-                    {{-- USER --}}
                     <td class="px-4 md:px-6 py-4">
                         <div class="flex items-center">
                             <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center mr-3 font-black shadow-inner text-xs md:text-sm">
@@ -64,21 +59,18 @@
                         </div>
                     </td>
 
-                    {{-- USERNAME --}}
                     <td class="px-4 md:px-6 py-4">
                         <span class="text-slate-500 text-xs md:text-sm font-medium">
                             {{ $user->username }}
                         </span>
                     </td>
 
-                    {{-- ROLE --}}
                     <td class="px-4 md:px-6 py-4 text-center">
                         <span class="px-2 py-1 bg-slate-50 text-slate-500 rounded-lg text-[9px] md:text-xs font-black uppercase">
                             {{ $user->role ?? 'user' }}
                         </span>
                     </td>
 
-                    {{-- AKSI --}}
                     <td class="px-4 md:px-6 py-4">
                         <div class="flex justify-center">
                             <a href="{{ route('admin.users.password.edit', $user->id) }}"
@@ -103,7 +95,6 @@
     </div>
 </div>
 
-{{-- PAGINATION --}}
 <div class="px-2 md:px-4">
     {{ $users->links() }}
 </div>

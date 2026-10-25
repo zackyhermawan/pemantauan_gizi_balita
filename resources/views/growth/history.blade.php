@@ -5,8 +5,6 @@
 @section('content')
 
 <div class="py-4 md:py-6 px-2 md:px-4 w-full max-w-5xl mx-auto">
-
-    {{-- Header & Counter --}}
     <div class="mb-6 md:mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div class="px-2">
             <h1 class="text-xl md:text-xl font-black text-slate-800 leading-tight">Riwayat Validasi</h1>
@@ -24,7 +22,6 @@
         </div>
     </div>
 
-    {{-- SECTION FILTER (Responsive Grid) --}}
     <div class="bg-white p-5 md:p-6 rounded-xl shadow-sm border border-slate-50 mb-8 mx-2">
         <form action="/growth/history" method="GET" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
             <div>
@@ -63,15 +60,12 @@
         </form>
     </div>
 
-    {{-- List Data --}}
     <div class="space-y-6 px-2">
         @forelse($history as $item)
             <div class="bg-white border border-slate-100 rounded-xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all relative overflow-hidden">
                 
-                {{-- Decorative element --}}
                 <div class="absolute top-0 right-0 w-24 h-24 bg-rose-50/50 rounded-full -mr-10 -mt-10"></div>
 
-                {{-- Card Header --}}
                 <div class="flex justify-between items-start mb-6 relative z-10">
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-12 md:w-16 md:h-16 bg-rose-100 text-rose-500 rounded-xl flex items-center justify-center text-lg md:text-xl font-black shadow-inner border border-rose-50">
@@ -92,7 +86,6 @@
                     </div>
                 </div>
 
-                {{-- Stats Grid --}}
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mb-6 relative z-10">
                     {{-- Fisik --}}
                     <div class="bg-slate-50/50 p-4 rounded-xl border border-slate-100">
@@ -104,7 +97,6 @@
                         </p>
                     </div>
 
-                    {{-- Status Gizi --}}
                     <div class="p-4 rounded-xl border flex flex-col justify-center {{ $item->nutritional_status == 'Gizi Baik' ? 'bg-emerald-50/50 border-emerald-100' : 'bg-amber-50/50 border-amber-100' }}">
                         <p class="text-[9px] font-black {{ $item->nutritional_status == 'Gizi Baik' ? 'text-emerald-400' : 'text-amber-500' }} uppercase mb-1 tracking-widest">Status Gizi</p>
                         <span class="text-sm md:text-base font-black {{ $item->nutritional_status == 'Gizi Baik' ? 'text-emerald-600' : 'text-amber-600' }} uppercase italic">
@@ -112,7 +104,6 @@
                         </span>
                     </div>
 
-                    {{-- Validasi --}}
                     <div class="bg-rose-50/50 p-4 rounded-xl border border-rose-100 flex flex-col justify-center">
                         <p class="text-[9px] font-black text-rose-400 uppercase mb-1 tracking-widest">Status Validasi</p>
                         <span class="text-sm md:text-base font-black text-rose-600 uppercase italic">
@@ -121,7 +112,6 @@
                     </div>
                 </div>
 
-                {{-- Catatan Admin (The Speech Bubble Style) --}}
                 @if($item->admin_notes)
                 <div class="relative z-10 mt-2 mb-4">
                     <div class="bg-white p-4 md:p-5 rounded-xl border-2 border-rose-50 relative">
@@ -139,7 +129,6 @@
                 </div>
                 @endif
 
-                {{-- Fitur Islami: Renungan untuk Bunda --}}
                 @if($item->quranVerse)
                 <div class="relative z-10 mt-4 bg-emerald-50/40 border border-slate-100 rounded-2xl p-5 md:p-6 shadow-sm">
                     <div class="flex items-center gap-2 mb-3">
@@ -148,22 +137,18 @@
                     </div>
 
                     <div class="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-emerald-100 space-y-3">
-                        {{-- Nama Surah --}}
                         <p class="text-xs font-bold text-emerald-700 flex items-center gap-1.5">
                             <span>📖</span> {{ $item->quranVerse->surah }}
                         </p>
 
-                        {{-- Teks Arab --}}
                         <p class="text-right text-lg md:text-xl font-serif text-slate-800 leading-loose py-1" dir="rtl">
                             {{ $item->quranVerse->arabic_text }}
                         </p>
 
-                        {{-- Terjemahan --}}
                         <p class="text-xs md:text-sm font-medium text-slate-600 italic leading-relaxed bg-emerald-50/30 p-3 rounded-lg border-l-2 border-emerald-400">
                             "{{ $item->quranVerse->translation }}"
                         </p>
 
-                        {{-- Makna --}}
                         <div class="pt-2 border-t border-slate-100">
                             <p class="text-[10px] font-black text-emerald-600 uppercase tracking-wider mb-1">Makna & Hikmah:</p>
                             <p class="text-xs text-slate-600 leading-relaxed">
@@ -187,7 +172,6 @@
         @endforelse
     </div>
 
-    {{-- Pagination --}}
     <div class="mt-10 flex justify-center scale-90 md:scale-100">
         {{ $history->links() }}
     </div>

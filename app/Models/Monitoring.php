@@ -33,7 +33,6 @@ class Monitoring extends Model
 
     public function quranVerse()
     {
-        // Mengambil ayat yang cocok berdasarkan kolom nutritional_status
         return $this->belongsTo(QuranVerse::class, 'nutritional_status', 'status_gizi');
     }
 }

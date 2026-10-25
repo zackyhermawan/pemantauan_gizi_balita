@@ -9,7 +9,6 @@
 </div>
 
 <div class="bg-white rounded-xl shadow-sm border border-rose-50 overflow-hidden">
-    {{-- Container untuk scroll horizontal di mobile --}}
     <div class="overflow-x-auto w-full">
         <table class="min-w-[700px] w-full text-left">
             <thead>
@@ -37,8 +36,6 @@
                 @endphp
 
                 <tr class="hover:bg-rose-50/10 transition-colors">
-
-                    {{-- Anak --}}
                     <td class="px-4 md:px-6 py-4">
                         <div class="flex items-center min-w-[150px]">
                             <div class="hidden sm:flex w-8 h-8 md:w-10 md:h-10 rounded-full bg-slate-100 items-center justify-center mr-3 font-black text-slate-400 text-xs md:text-base">
@@ -61,7 +58,6 @@
                         </div>
                     </td>
 
-                    {{-- Data terakhir --}}
                     <td class="px-4 md:px-6 py-4 text-center">
                         @if($lastGrowth)
                             <span class="text-xs md:text-sm font-black text-slate-700 whitespace-nowrap">
@@ -72,7 +68,6 @@
                         @endif
                     </td>
 
-                    {{-- STATUS --}}
                     <td class="px-4 md:px-6 py-4 text-center">
                         @php
                             $badgeClass = 'text-[9px] md:text-[10px] px-3 py-1 rounded-full font-black uppercase whitespace-nowrap ';
@@ -91,7 +86,6 @@
                         </span>
                     </td>
 
-                    {{-- AKSI --}}
                     <td class="px-4 md:px-6 py-4 text-center">
                         <a href="/admin/monitoring/{{ $item['child']->id }}/edit"
                            class="inline-block px-4 md:px-6 py-2 bg-rose-500 text-white text-[9px] md:text-[10px] font-black uppercase rounded-lg md:rounded-xl hover:bg-rose-600 active:scale-[0.98] transition-all shadow-md whitespace-nowrap">
@@ -99,7 +93,6 @@
                         </a>
                     </td>
 
-                    {{-- RIWAYAT --}}
                     <td class="px-4 md:px-6 py-4 text-center">
                         <a href="/admin/monitoring/history/{{ $item['child']->id }}"
                            class="inline-block px-4 md:px-6 py-2 bg-blue-500 text-white text-[9px] md:text-[10px] font-black uppercase rounded-lg md:rounded-xl hover:bg-blue-600 active:scale-[0.98] transition-all shadow-md whitespace-nowrap">

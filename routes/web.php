@@ -53,16 +53,11 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/users/password', [ProfileController::class, 'index'])
-        ->name('admin.users.password.index');
+    Route::get('/users/password', [ProfileController::class, 'index'])->name('admin.users.password.index');
 
-    // form edit password
-    Route::get('/users/{id}/password/edit', [ProfileController::class, 'edit'])
-        ->name('admin.users.password.edit');
+    Route::get('/users/{id}/password/edit', [ProfileController::class, 'edit'])->name('admin.users.password.edit');
 
-    // update password
-    Route::put('/users/{id}/password', [ProfileController::class, 'update'])
-        ->name('admin.users.password.update');
+    Route::put('/users/{id}/password', [ProfileController::class, 'update'])->name('admin.users.password.update');
 });
 
 Route::middleware('auth')->group(function () {

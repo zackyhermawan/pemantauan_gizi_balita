@@ -3,7 +3,6 @@
 @section('title', 'Laporan Konsumsi')
 
 @section('content')
-{{-- Header responsif --}}
 <div class="mb-6 md:mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
     <div>
         <h2 class="text-xl md:text-2xl lg:text-3xl font-black text-slate-800 uppercase tracking-tighter">Laporan Konsumsi</h2>
@@ -11,7 +10,6 @@
     </div>
 </div>
 
-{{-- SECTION FILTER: Menyesuaikan grid untuk mobile --}}
 <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-100 mb-6">
     <form action="{{ route('admin.reports.food') }}" method="GET" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="flex flex-col">
@@ -38,7 +36,6 @@
     </form>
 </div>
 
-{{-- TABEL DATA: Dengan overflow horizontal untuk layar sempit --}}
 <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden mb-6">
     <div class="overflow-x-auto w-full">
         <table class="min-w-[700px] w-full text-left">
@@ -82,7 +79,6 @@
     </div>
 </div>
 
-{{-- PAGINATION --}}
 <div class="mt-4 px-2">
     {{ $foodRecords->links() }}
 </div>

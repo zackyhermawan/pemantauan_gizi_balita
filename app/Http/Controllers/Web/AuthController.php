@@ -10,7 +10,6 @@ use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
-    // ================= REGISTER =================
     public function showRegister()
     {
         return view('auth.register');
@@ -40,7 +39,6 @@ class AuthController extends Controller
         return redirect('/')->with('success', 'Register berhasil, silakan login');
     }
 
-    // ================= LOGIN =================
     public function showLogin()
     {
         return view('auth.login');
@@ -73,7 +71,6 @@ class AuthController extends Controller
         ])->withInput();
     }
 
-    // ================= LOGOUT =================
     public function logout(Request $request)
     {
         Auth::logout();

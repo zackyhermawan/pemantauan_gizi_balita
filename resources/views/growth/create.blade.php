@@ -4,13 +4,11 @@
 
 @section('content')
 <div class="max-w-2xl mx-auto px-2">
-    {{-- Tombol Kembali --}}
     <a href="/growth" class="inline-flex items-center text-rose-500 font-bold mb-4 md:mb-6 hover:translate-x-1 transition-transform text-sm md:text-base px-2">
         <x-heroicon-o-arrow-left class="w-4 h-4 md:w-5 md:h-5 mr-2" />
         Kembali
     </a>
 
-    {{-- CARD FORM --}}
     <div class="bg-white rounded-2xl md:rounded-3xl p-6 md:p-10 shadow-sm border border-rose-50">
         {{-- Header Form --}}
         <div class="flex items-center mb-6 md:mb-8">
@@ -23,10 +21,9 @@
             </div>
         </div>
 
-        <form action="/growth" method="POST" onsubmit="handleLogin(this)" class="space-y-5 md:space-y-6">
+        <form action="/growth" method="POST" onsubmit="handleSubmit(this)" class="space-y-5 md:space-y-6">
             @csrf
             
-            {{-- Pilih Anak --}}
             <div>
                 <label class="block text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-widest mb-2 ml-2 italic">Pilih Anak</label>
                 <div class="relative">
@@ -45,7 +42,6 @@
                 @error('child_id') <p class="text-rose-500 text-[10px] md:text-xs mt-1 ml-2 font-bold">{{ $message }}</p> @enderror
             </div>
 
-            {{-- Tanggal Periksa --}}
             <div>
                 <label class="block text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-widest mb-2 ml-2 italic">Tanggal Periksa</label>
                 <input type="date" name="record_date" value="{{ old('record_date', date('Y-m-d')) }}"
@@ -53,7 +49,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-                {{-- Berat Badan --}}
                 <div class="relative">
                     <label class="block text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-widest mb-2 ml-2 italic">Berat Badan (kg)</label>
                     <div class="relative">
@@ -67,7 +62,6 @@
                     @error('weight') <p class="text-rose-500 text-[10px] md:text-xs mt-1 ml-2 font-bold">{{ $message }}</p> @enderror
                 </div>
 
-                {{-- Tinggi Badan --}}
                 <div class="relative">
                     <label class="block text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-widest mb-2 ml-2 italic">Tinggi Badan (cm)</label>
                     <div class="relative">
@@ -82,7 +76,6 @@
                 </div>
             </div>
 
-            {{-- Tombol Simpan --}}
             <button id="registerBtn" type="submit" class="flex items-center justify-center gap-3 w-full mt-4 py-4 md:py-5 bg-rose-500 text-white font-black rounded-xl md:rounded-2xl shadow-xl shadow-rose-100 hover:bg-rose-600 active:scale-[0.98] transition-all uppercase tracking-widest text-xs md:text-sm">
                 <span id="btnText">Simpan Data</span>
                 <div id="spinner" class="hidden animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
@@ -91,22 +84,19 @@
     </div>
 </div>
 <script>
-    function handleLogin(form) {
+    function handleSubmit(form) {
         const btn = document.getElementById('registerBtn');
         const text = document.getElementById('btnText');
         const spinner = document.getElementById('spinner');
 
-        // 1. Matikan tombol biar gak di-klik dua kali
         btn.disabled = true;
         
-        // 2. Ubah tampilan tombol (agak transparan & kursor berubah)
         btn.classList.add('opacity-80', 'cursor-not-allowed');
 
-        // 3. Ganti teks & munculkan spinner
         text.innerText = 'Memuat...'; 
         spinner.classList.remove('hidden');
 
-        return true; // Biarkan form lanjut kirim data ke server
+        return true; 
     }
 </script>
 @endsection

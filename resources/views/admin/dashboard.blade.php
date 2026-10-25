@@ -4,7 +4,6 @@
 
 @section('content')
 
-{{-- Header dengan teks responsif --}}
 <div class="mb-6 md:mb-8">
     <h2 class="text-xl md:text-2xl lg:text-3xl font-black text-slate-800 uppercase tracking-tighter">
         Ringkasan Sistem
@@ -14,11 +13,7 @@
     </p>
 </div>
 
-{{-- ================= CARD: Grid Responsif ================= --}}
-{{-- 1 kolom di HP, 2 kolom di Tablet, 3 kolom di Laptop --}}
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-10">
-
-    {{-- Total Anak --}}
     <div class="bg-white p-5 md:p-6 rounded-xl border border-blue-50 shadow-sm transition-all hover:shadow-md">
         <div class="w-10 h-10 md:w-12 md:h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-3 md:mb-4">
             <x-heroicon-o-users class="w-5 h-5 md:w-6 md:h-6" />
@@ -31,7 +26,6 @@
         </h3>
     </div>
 
-    {{-- Total Bunda --}}
     <div class="bg-white p-5 md:p-6 rounded-xl border border-rose-50 shadow-sm transition-all hover:shadow-md">
         <div class="w-10 h-10 md:w-12 md:h-12 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center mb-3 md:mb-4">
             <x-heroicon-o-heart class="w-5 h-5 md:w-6 md:h-6" />
@@ -44,7 +38,6 @@
         </h3>
     </div>
 
-    {{-- Perlu Validasi --}}
     <div class="bg-white p-5 md:p-6 rounded-xl border border-amber-50 shadow-sm transition-all hover:shadow-md sm:col-span-2 lg:col-span-1">
         <div class="w-10 h-10 md:w-12 md:h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mb-3 md:mb-4">
             <x-heroicon-o-clock class="w-5 h-5 md:w-6 md:h-6" />
@@ -59,7 +52,6 @@
 
 </div>
 
-{{-- ================= MONITORING TERBARU ================= --}}
 <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden mb-10">
 
     <div class="p-5 md:p-6 border-b border-slate-50 flex justify-between items-center">

@@ -4,7 +4,6 @@
 
 @section('content')
 
-{{-- HEADER: Responsif layout --}}
 <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-2">
     <div>
         <h3 class="text-slate-500 text-xs md:text-sm font-medium uppercase tracking-wider">Nutrisi Si Kecil</h3>
@@ -15,10 +14,8 @@
     </a>
 </div>
 
-{{-- SECTION FILTER: Diperbaiki agar tidak terlalu rapat di HP --}}
 <div class="bg-white p-5 md:p-6 rounded-2xl md:rounded-3xl shadow-sm border border-amber-100 mb-6 mx-2">
     <form action="/food" method="GET" class="space-y-4 md:space-y-0 md:grid md:grid-cols-4 md:gap-4">
-        {{-- Filter Anak --}}
         <div>
             <label class="text-[10px] font-black text-slate-400 uppercase mb-1.5 block ml-1 tracking-widest italic">Pilih Anak</label>
             <select name="child_id" class="w-full px-4 py-3 bg-slate-100 border-none rounded-xl text-sm font-bold text-slate-700 focus:ring-2 focus:ring-rose-200 transition-all appearance-none bg-no-repeat bg-[right_1rem_center]">
@@ -29,7 +26,6 @@
             </select>
         </div>
 
-        {{-- Filter Waktu Makan --}}
         <div>
             <label class="text-[10px] font-black text-slate-400 uppercase mb-1.5 block ml-1 tracking-widest italic">Waktu Makan</label>
             <select name="feeding_period" class="w-full px-4 py-3 bg-slate-100 border-none rounded-xl text-sm font-bold text-slate-700 focus:ring-2 focus:ring-rose-200 transition-all">
@@ -40,13 +36,11 @@
             </select>
         </div>
 
-        {{-- Filter Tanggal --}}
         <div>
             <label class="text-[10px] font-black text-slate-400 uppercase mb-1.5 block ml-1 tracking-widest italic">Tanggal</label>
             <input type="date" name="date" value="{{ request('date') }}" class="w-full px-4 py-3 bg-slate-100 border-none rounded-xl text-sm font-bold text-slate-700 focus:ring-2 focus:ring-rose-200 transition-all">
         </div>
 
-        {{-- Tombol Aksi: Flex-col di HP agar tombol lebar --}}
         <div class="flex items-end gap-2 pt-2 md:pt-0">
             <button type="submit" class="flex-1 py-3 bg-slate-800 text-white font-black rounded-xl text-xs uppercase tracking-widest hover:bg-slate-700 transition-all shadow-md active:scale-95">
                 Filter
@@ -65,7 +59,6 @@
     </div>
 @endif
 
-{{-- TABEL: min-width untuk scroll horizontal --}}
 <div class="bg-white rounded-2xl md:rounded-3xl shadow-sm border border-amber-50 overflow-hidden mx-2">
     <div class="overflow-x-auto w-full">
         <table class="w-full text-left border-collapse min-w-[750px]">
@@ -131,7 +124,6 @@
     </div>
 </div>
 
-{{-- Pagination --}}
 <div class="mt-8 px-4">
     {{ $records->links() }}
 </div>

@@ -3,14 +3,12 @@
 @section('title', 'Tambah Data Anak (Admin)')
 
 @section('content')
-{{-- max-w disesuaikan agar tidak terlalu lebar di desktop, tetap nyaman di mobile --}}
 <div class="max-w-2xl mx-auto py-2 md:py-4">
     <a href="/admin/children" class="inline-flex items-center text-rose-500 font-bold mb-4 md:mb-6 hover:translate-x-1 transition-transform text-sm md:text-base">
         <x-heroicon-o-arrow-left class="w-4 h-4 md:w-5 md:h-5 mr-2" />
         Kembali
     </a>
 
-    {{-- rounded-3xl untuk mobile, rounded-[3rem] untuk desktop agar tetap estetik --}}
     <div class="bg-white rounded-xl md:rounded-xl p-6 md:p-10 shadow-sm border border-rose-50 relative overflow-hidden">
         
         <div class="mb-6 md:mb-10 text-center">
@@ -18,7 +16,7 @@
             <p class="text-xs md:text-sm text-slate-400 font-medium mt-2">Menambahkan data anak ke akun Bunda tertentu.</p>
         </div>
 
-        <form action="/admin/children" onsubmit="handleLogin(this)" method="POST" class="space-y-4 md:space-y-6">
+        <form action="/admin/children" onsubmit="handleSubmit(this)" method="POST" class="space-y-4 md:space-y-6">
             @csrf
             
             <div class="space-y-1">
@@ -81,7 +79,6 @@
     </div>
 </div>
 
-{{-- Script JS tetap sama (fungsional) --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const userSelect = document.getElementById('user_select');
@@ -99,22 +96,19 @@
         });
     });
 
-    function handleLogin(form) {
+    function handleSubmit(form) {
         const btn = document.getElementById('registerBtn');
         const text = document.getElementById('btnText');
         const spinner = document.getElementById('spinner');
 
-        // 1. Matikan tombol biar gak di-klik dua kali
         btn.disabled = true;
         
-        // 2. Ubah tampilan tombol (agak transparan & kursor berubah)
         btn.classList.add('opacity-80', 'cursor-not-allowed');
 
-        // 3. Ganti teks & munculkan spinner
         text.innerText = 'Memuat...'; 
         spinner.classList.remove('hidden');
 
-        return true; // Biarkan form lanjut kirim data ke server
+        return true;
     }
 </script>
 @endsection

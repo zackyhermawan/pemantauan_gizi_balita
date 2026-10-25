@@ -11,9 +11,7 @@
         h-screen {
             height: 100vh; 
             height: 100dvh; 
-        }
-        
-        /* Opsional: Mempercantik scrollbar di area konten */
+        }        
         .content-scrollbar::-webkit-scrollbar { width: 6px; }
         .content-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .content-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
@@ -24,15 +22,10 @@
 <body class="bg-rose-50/30 text-slate-700 font-sans min-h-screen overflow-hidden" x-data="{ isOpen: false }">
 
 <div class="flex h-full">
-    <div x-cloak x-show="isOpen" 
-        x-transition:enter="transition opacity ease-out duration-300"
-        @click="isOpen = false" 
-        class="fixed inset-0 z-40 bg-black/50 lg:hidden">
+    <div x-cloak x-show="isOpen" x-transition:enter="transition opacity ease-out duration-300" @click="isOpen = false"  class="fixed inset-0 z-40 bg-black/50 lg:hidden">
     </div>
 
-    <aside x-cloak
-        :class="isOpen ? 'translate-x-0' : '-translate-x-full'" 
-        class="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-xl transition-transform duration-300 transform lg:translate-x-0 lg:static lg:inset-y-0 flex flex-col h-screen border-r border-rose-100 flex-shrink-0">
+    <aside x-cloak :class="isOpen ? 'translate-x-0' : '-translate-x-full'"  class="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-xl transition-transform duration-300 transform lg:translate-x-0 lg:static lg:inset-y-0 flex flex-col h-screen border-r border-rose-100 flex-shrink-0">
         
         <div class="p-6 text-center border-b border-rose-100 flex-shrink-0">
             <div class="inline-flex items-center justify-center w-12 h-12 mb-2 rounded-full bg-rose-100 text-rose-500">
@@ -60,8 +53,7 @@
             @endphp
 
             @foreach($navItems as $item)
-            <a href="{{ $item['url'] }}" 
-               class="flex items-center px-4 py-3 text-sm font-medium transition-colors rounded-2xl group {{ Request::is(ltrim($item['url'], '/')) ? 'bg-rose-500 text-white shadow-lg shadow-rose-200' : 'text-slate-500 hover:bg-rose-50 hover:text-rose-500' }}">
+            <a href="{{ $item['url'] }}" class="flex items-center px-4 py-3 text-sm font-medium transition-colors rounded-2xl group {{ Request::is(ltrim($item['url'], '/')) ? 'bg-rose-500 text-white shadow-lg shadow-rose-200' : 'text-slate-500 hover:bg-rose-50 hover:text-rose-500' }}">
                 <x-dynamic-component :component="'heroicon-'.$item['icon']" class="w-6 h-6 mr-3" />
                 {{ $item['label'] }}
             </a>

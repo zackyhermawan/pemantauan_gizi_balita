@@ -4,23 +4,20 @@
 
 @section('content')
 <div class="max-w-2xl mx-auto px-2">
-    {{-- Tombol Kembali: Font lebih kecil di mobile agar tidak memakan tempat --}}
     <a href="/children" class="inline-flex items-center text-rose-500 font-bold mb-4 md:mb-6 hover:translate-x-1 transition-transform text-sm md:text-base px-2">
         <x-heroicon-o-arrow-left class="w-4 h-4 md:w-5 md:h-5 mr-2" />
         Kembali ke Daftar
     </a>
 
-    {{-- CARD FORM --}}
     <div class="bg-white rounded-2xl md:rounded-3xl p-6 md:p-10 shadow-sm border border-rose-50">
         <div class="mb-6 md:mb-8">
             <h2 class="text-xl md:text-2xl font-black text-slate-800 mb-1 leading-tight">Data Anak Baru</h2>
             <p class="text-xs md:text-sm text-slate-500 font-medium italic">Masukkan informasi dasar si kecil untuk mulai memantau perkembangannya.</p>
         </div>
 
-        <form action="/children" method="POST" onsubmit="handleLogin(this)" class="space-y-5 md:space-y-6">
+        <form action="/children" method="POST" onsubmit="handleSubmit(this)" class="space-y-5 md:space-y-6">
             @csrf
             
-            {{-- Nama Lengkap --}}
             <div>
                 <label class="block text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-widest mb-2 ml-2 italic">Nama Lengkap Anak</label>
                 <input type="text" name="name" value="{{ old('name') }}"
@@ -29,7 +26,6 @@
                 @error('name') <span class="text-rose-500 text-[10px] md:text-xs mt-1 ml-2 font-bold">{{ $message }}</span> @enderror
             </div>
 
-            {{-- Jenis Kelamin --}}
             <div>
                 <label class="block text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-widest mb-2 ml-2 italic">Jenis Kelamin</label>
                 <div class="relative">
@@ -48,7 +44,6 @@
             
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-                {{-- Tanggal Lahir --}}
                 <div>
                     <label class="block text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-widest mb-2 ml-2 italic">Tanggal Lahir</label>
                     <input type="date" name="date_of_birth" value="{{ old('date_of_birth') }}"
@@ -56,7 +51,6 @@
                     @error('date_of_birth') <span class="text-rose-500 text-[10px] md:text-xs mt-1 ml-2 font-bold">{{ $message }}</span> @enderror
                 </div>
 
-                {{-- Nama Orang Tua --}}
                 <div>
                     <label class="block text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-widest mb-2 ml-2 italic">Nama Bunda/Ayah</label>
                     <input type="text" name="parent_name" value="{{ old('parent_name', auth()->user()->name) }}"
@@ -66,7 +60,6 @@
                 </div>
             </div>
 
-            {{-- Button --}}
             <button id="registerBtn" type="submit" class="flex items-center justify-center gap-3 w-full mt-4 py-4 md:py-5 bg-rose-500 text-white font-black rounded-xl md:rounded-2xl shadow-xl shadow-rose-100 hover:bg-rose-600 active:scale-[0.98] transition-all uppercase tracking-widest text-xs md:text-sm">
                 <span id="btnText">Simpan data si kecil</span>
                 <div id="spinner" class="hidden animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
@@ -76,22 +69,19 @@
 </div>
 
 <script>
-    function handleLogin(form) {
+    function handleSubmit(form) {
         const btn = document.getElementById('registerBtn');
         const text = document.getElementById('btnText');
         const spinner = document.getElementById('spinner');
 
-        // 1. Matikan tombol biar gak di-klik dua kali
         btn.disabled = true;
         
-        // 2. Ubah tampilan tombol (agak transparan & kursor berubah)
         btn.classList.add('opacity-80', 'cursor-not-allowed');
 
-        // 3. Ganti teks & munculkan spinner
         text.innerText = 'Memuat...'; 
         spinner.classList.remove('hidden');
 
-        return true; // Biarkan form lanjut kirim data ke server
+        return true; 
     }
 </script>
 @endsection

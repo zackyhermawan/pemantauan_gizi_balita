@@ -9,7 +9,6 @@ use App\Models\Children;
 
 class ChildController extends Controller
 {
-    // LIST DATA
     public function index()
     {
         $user = Auth::user();
@@ -23,13 +22,11 @@ class ChildController extends Controller
         return view('children.index', compact('children'));
     }
 
-    // FORM CREATE
     public function create()
     {
         return view('children.create');
     }
 
-    // SIMPAN DATA
     public function store(Request $request)
     {
         $request->validate([
@@ -55,13 +52,10 @@ class ChildController extends Controller
         return redirect('/children')->with('success', 'Data anak berhasil ditambahkan');
     }
 
-    // FORM EDIT
     public function edit($id)
     {
         $child = Children::findOrFail($id);
 
-        // proteksi user
-        // Ubah di fungsi edit, update, dan destroy
         if (Auth::user()->role === 'user' && $child->user_id != Auth::id()) {
             abort(403);
         }
@@ -69,12 +63,10 @@ class ChildController extends Controller
         return view('children.edit', compact('child'));
     }
 
-    // UPDATE
     public function update(Request $request, $id)
     {
         $child = Children::findOrFail($id);
 
-// Ubah di fungsi edit, update, dan destroy
         if (Auth::user()->role === 'user' && $child->user_id != Auth::id()) {
             abort(403);
         }
@@ -91,12 +83,10 @@ class ChildController extends Controller
         return redirect('/children')->with('success', 'Data anak berhasil diupdate');
     }
 
-    // DELETE
     public function destroy($id)
     {
         $child = Children::findOrFail($id);
 
-        // Ubah di fungsi edit, update, dan destroy
         if (Auth::user()->role === 'user' && $child->user_id != Auth::id()) {
             abort(403);
         }
